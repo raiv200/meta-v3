@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "../lib/utils";
 import { LogOutIcon, PlusCircleIcon, UsersIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
@@ -55,6 +55,7 @@ const sideBarNavItems = [
 export function DashboardNav() {
   const path = usePathname();
   const session = useSession();
+  const router = useRouter();
   const image = session?.data?.user?.image;
   const email = session?.data?.user?.email;
 
@@ -139,8 +140,9 @@ export function DashboardNav() {
           onClick={() => {
 
             signOut();
+            router.push('/')
             toast.success("Logout Successful !!", {
-              duration:5000
+              duration:10000
             })
           } 
        
