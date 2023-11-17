@@ -19,9 +19,9 @@ export async function POST(request) {
 
     // console.log(`Placed --- ${requestBody.actionType} for ${requestBody.symbol} Price  ${requestBody.price} `);
 
-    if (requestBody.actionType.toLowerCase() === "buy") {
+    if (requestBody?.actionType === 'buy') {
       orderType = "ORDER_TYPE_BUY";
-    } else if (request.actionType.toLowerCase() === "sell") {
+    } else if (request?.actionType === 'sell') {
       orderType = "ORDER_TYPE_SELL";
     }
     console.log(
