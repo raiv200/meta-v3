@@ -30,7 +30,7 @@ export async function POST(request) {
     const newRequestBody = {
       actionType: orderType,
       symbol: requestBody.symbol,
-      price: parseFloat(requestBody.price),
+      price: parseFloat(requestBody.price).toFixed(2),
     };
     try {
       const response = await fetch(`${WEB_URL}/api/trade`, {

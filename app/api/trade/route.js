@@ -27,8 +27,8 @@ export async function POST(request) {
       newRequestBody.actionType = requestBody.actionType ;
       newRequestBody.symbol = requestBody.symbol === 'GOLD' ? 'XAUUSD' : requestBody.symbol === 'SILVER' ? 'XAGUSD' :'';
       newRequestBody.volume = 0.01;
-      newRequestBody.takeProfit = requestBody.actionType === "ORDER_TYPE_BUY" ? requestBody.price*1.002 : requestBody.actionType === "ORDER_TYPE_SELL" ? requestBody.price*0.998 :'';
-      newRequestBody.stopLoss = requestBody.actionType === "ORDER_TYPE_BUY" ? requestBody.price*0.999 : requestBody.actionType === "ORDER_TYPE_SELL" ? requestBody.price*1.001 :'';
+      newRequestBody.takeProfit = requestBody.actionType === "ORDER_TYPE_BUY" ? parseFloat(requestBody.price*1.002).toFixed(2) : requestBody.actionType === "ORDER_TYPE_SELL" ? parseFloat(requestBody.price*0.998).toFixed(2) :'';
+      newRequestBody.stopLoss = requestBody.actionType === "ORDER_TYPE_BUY" ? parseFloat(requestBody.price*0.999).toFixed(2) : requestBody.actionType === "ORDER_TYPE_SELL" ? parseFloat(requestBody.price*1.001).toFixed(2) :'';
 
       // newRequestBody.takeProfit = requestBody.takeProfit;
       // newRequestBody.stopLoss=requestBody.stopLoss;
@@ -44,41 +44,41 @@ export async function POST(request) {
     // newRequestBody.takeProfit = requestBody.price*0.999;
     // newRequestBody.stopLoss = requestBody.price*1.002;
 
-    if (
-      requestBody.actionType === "ORDER_TYPE_BUY_LIMIT" ||
-      requestBody.actionType === "ORDER_TYPE_SELL_LIMIT"
-    ) {
-      newRequestBody.actionType = requestBody.actionType;
-      newRequestBody.symbol =  requestBody.symbol ? "CADJPYm" : "CADJPYm";
-      newRequestBody.volume = 0.01;
-      newRequestBody.openPrice = requestBody.openPrice;
-      // newRequestBody.takeProfit = requestBody.takeProfit;
-      // newRequestBody.stopLoss=requestBody.stopLoss;
-    }
+    // if (
+    //   requestBody.actionType === "ORDER_TYPE_BUY_LIMIT" ||
+    //   requestBody.actionType === "ORDER_TYPE_SELL_LIMIT"
+    // ) {
+    //   newRequestBody.actionType = requestBody.actionType;
+    //   newRequestBody.symbol =  requestBody.symbol ? "CADJPYm" : "CADJPYm";
+    //   newRequestBody.volume = 0.01;
+    //   newRequestBody.openPrice = requestBody.openPrice;
+    //   // newRequestBody.takeProfit = requestBody.takeProfit;
+    //   // newRequestBody.stopLoss=requestBody.stopLoss;
+    // }
 
-    if (
-      requestBody.actionType === "ORDER_TYPE_BUY_STOP" ||
-      requestBody.actionType === "ORDER_TYPE_SELL_STOP"
-    ) {
-      newRequestBody.actionType = requestBody.actionType;
-      newRequestBody.symbol = requestBody.symbol;
-      newRequestBody.volume = requestBody.volume;
-      newRequestBody.openPrice = requestBody.openPrice;
-      newRequestBody.takeProfit = requestBody.takeProfit;
-      newRequestBody.stopLoss = requestBody.stopLoss;
-    }
+    // if (
+    //   requestBody.actionType === "ORDER_TYPE_BUY_STOP" ||
+    //   requestBody.actionType === "ORDER_TYPE_SELL_STOP"
+    // ) {
+    //   newRequestBody.actionType = requestBody.actionType;
+    //   newRequestBody.symbol = requestBody.symbol;
+    //   newRequestBody.volume = requestBody.volume;
+    //   newRequestBody.openPrice = requestBody.openPrice;
+    //   newRequestBody.takeProfit = requestBody.takeProfit;
+    //   newRequestBody.stopLoss = requestBody.stopLoss;
+    // }
 
-    if (
-      requestBody.actionType === "ORDER_TYPE_BUY_STOP_LIMIT" ||
-      requestBody.actionType === "ORDER_TYPE_SELL_STOP_LIMIT"
-    ) {
-      newRequestBody.actionType = requestBody.actionType;
-      newRequestBody.symbol = requestBody.symbol;
-      newRequestBody.volume = requestBody.volume;
-      newRequestBody.openPrice = requestBody.openPrice;
-      newRequestBody.takeProfit = requestBody.takeProfit;
-      newRequestBody.stopLoss = requestBody.stopLoss;
-    }
+    // if (
+    //   requestBody.actionType === "ORDER_TYPE_BUY_STOP_LIMIT" ||
+    //   requestBody.actionType === "ORDER_TYPE_SELL_STOP_LIMIT"
+    // ) {
+    //   newRequestBody.actionType = requestBody.actionType;
+    //   newRequestBody.symbol = requestBody.symbol;
+    //   newRequestBody.volume = requestBody.volume;
+    //   newRequestBody.openPrice = requestBody.openPrice;
+    //   newRequestBody.takeProfit = requestBody.takeProfit;
+    //   newRequestBody.stopLoss = requestBody.stopLoss;
+    // }
 
     // console.log("New Request Body ---> ", JSON.stringify(newRequestBody));
 
