@@ -10,11 +10,11 @@ export default function DashboardPage() {
   const session = useSession();
   const router = useRouter();
 
-  if (!session) {
-    router.push("/login");
-  }
+  // if (!session) {
+  //   router.push("/login");
+  // }
 
-  router.push("/dashboard/live");
+  // router.push("/dashboard/live");
 
   return (
     <div className="border-2 w-full ">
