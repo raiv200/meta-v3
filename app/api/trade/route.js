@@ -34,6 +34,8 @@ export async function POST(request) {
       // newRequestBody.stopLoss=requestBody.stopLoss;
     }
 
+    console.log("New Request Body",newRequestBody);
+
      //  For sell Order
 
     // newRequestBody.actionType = requestBody.actionType;
