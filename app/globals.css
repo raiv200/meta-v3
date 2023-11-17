@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body::-webkit-scrollbar {
+    width: 0.6em;
+    /* height: 0.6em; */
+}
+
+body::-webkit-scrollbar-track {
+    /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #bfc2c8;
+    outline: 1px solid #d1d5db;
+    border-radius: 2px;
+}
+
+.custom-scroll::-webkit-scrollbar {
+    height: 0.6em;
+    width: 0.6em;
+
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+    /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    background-color:transparent;
+    outline: none;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #bfc2c8;
+    outline: 1px solid #d1d5db;
+    border-radius: 2px;
+}
+
+
+
+@layer base {
+    .input {
+        @apply block w-full rounded-md border-0 text-sm font-semibold px-3 py-3 pr-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6
+    }
+
+    .label {
+        @apply block text-sm font-medium leading-6 text-gray-900
+    }
+
+    .select {
+        @apply block w-full rounded-md border-0 text-sm font-semibold px-3 py-3 pr-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6
+    }
+}
+
+.full-width-table {
+    width: 100%;
+    table-layout: auto;
+    /* This is the key property */
+}
