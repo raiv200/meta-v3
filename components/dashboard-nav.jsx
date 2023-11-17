@@ -143,8 +143,6 @@ export function DashboardNav() {
             })
         
             signOut();
-            router.replace('/')
-            
           } 
        
           }
