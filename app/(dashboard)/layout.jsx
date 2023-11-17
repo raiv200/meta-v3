@@ -6,13 +6,17 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 // import {auth} from "../firebase"
 
-
-
 export default async function Dashboardayout({ children }) {
   const session = await getServerSession(authOptions);
-  
+
+  if(session){
+    console.log("session exist");
+  }else{
+    redirect('/login');
+  }
+
   // console.log("server sesion from Dashboard!!", session);
-  
+
   return (
     <div className="relative flex flex-col md:grid md:grid-cols-12 min-h-screen w-full ">
       {/* Dashboard Side Bar  */}
@@ -24,12 +28,12 @@ export default async function Dashboardayout({ children }) {
           <DashboardNav />
         </aside>
       </div>
-      <div className="sticky top-0 z-50 md:hidden flex h-[60px] bg-gray-900 ">
-
-      </div>
+      <div className="sticky top-0 z-50 md:hidden flex h-[60px] bg-gray-900 "></div>
 
       {/* Main Dashboard  */}
-      <main className=" md:col-span-10 flex flex-1 md:flex min-h-full ">{children}</main>
+      <main className=" md:col-span-10 flex flex-1 md:flex min-h-full ">
+        {children}
+      </main>
     </div>
   );
 }

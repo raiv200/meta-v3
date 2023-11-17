@@ -13,7 +13,9 @@ import StrategyList from "./strategy-list";
 export default async function AddNewStrategy() {
   const session = await getServerSession(authOptions);
 
+
   const email = session?.user?.email;
+
 
   const userAccountData = await getUserAccount(email);
   const userId = userAccountData[0]?.id ? userAccountData[0]?.id : "";

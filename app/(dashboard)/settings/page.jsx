@@ -7,6 +7,7 @@ import { getUserAccount } from "../../../db/postgres";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import DeleteAccountModal from "./delete-account-modal";
+import { redirect } from "next/dist/server/api-utils";
 
 // async function fetchUserMetaData(userId) {
 //   const getUserMetaData = await getUserMetaAccount(userId);
@@ -19,8 +20,9 @@ import DeleteAccountModal from "./delete-account-modal";
 
 export default async function SettingsPage() {
   const session = await getServerSession(authOptions);
-
   const email = session?.user?.email;
+
+  
   // console.log("user email setings -->", email);
 
   const userAccountData = await getUserAccount(email);

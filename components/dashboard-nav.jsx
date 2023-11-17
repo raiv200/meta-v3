@@ -138,12 +138,13 @@ export function DashboardNav() {
         <button
           role="button"
           onClick={() => {
-
-            signOut();
-            router.push('/')
             toast.success("Logout Successful !!", {
               duration:10000
             })
+        
+            signOut();
+            router.replace('/')
+            
           } 
        
           }
