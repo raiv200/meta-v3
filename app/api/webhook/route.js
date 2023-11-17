@@ -21,7 +21,7 @@ export async function POST(request) {
 
     if (requestBody?.actionType === 'buy') {
       orderType = "ORDER_TYPE_BUY";
-    } else if (request?.actionType === 'sell') {
+    } else if (requestBody?.actionType === 'sell') {
       orderType = "ORDER_TYPE_SELL";
     }
     console.log(
@@ -30,7 +30,7 @@ export async function POST(request) {
     const newRequestBody = {
       actionType: orderType,
       symbol: requestBody.symbol,
-      price: requestBody.price,
+      price: parseFloat(requestBody.price),
     };
     try {
       const response = await fetch(`${WEB_URL}/api/trade`, {
