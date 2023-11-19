@@ -97,6 +97,10 @@ export default function DeleteAccountModal() {
 
     const credential = EmailAuthProvider.credential(email, password);
 
+    const formRequestUserAccount = {
+      email: email,
+    };
+
     const accountResponse = await fetch("/api/delete-user-account", {
       method: "POST",
       headers: {
@@ -147,9 +151,7 @@ export default function DeleteAccountModal() {
         console.error("Error re-authenticating user:", reauthError);
       });
 
-      const formRequestUserAccount = {
-        email: email,
-      };
+      
      
   };
 
