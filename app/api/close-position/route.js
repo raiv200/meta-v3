@@ -3,6 +3,8 @@ const accountId = process.env.META_ACCOUNT_ID;
 const baseUrl = "https://mt-client-api-v1.new-york.agiliumtrade.ai";
 const API_URL = `${baseUrl}/users/current/accounts/${accountId}/trade`;
 
+export const dynamic = "force-dynamic"
+
 const headers = {
   'Content-Type': 'application/json',
   'Accept': "application/json",

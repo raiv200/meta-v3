@@ -139,10 +139,10 @@ export function DashboardNav() {
           role="button"
           onClick={() => {
             toast.success("Logout Successful !!", {
-              duration:10000
+              duration:5000
             })
         
-            signOut();
+            signOut({redirect:false}).then(() => router.push('/'));
           } 
        
           }

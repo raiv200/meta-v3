@@ -5,6 +5,8 @@ const authToken = process.env.META_AUTH_TOKEN;
 const baseUrl = "https://copyfactory-api-v1.new-york.agiliumtrade.ai";
 const API_URL_ONE = `${baseUrl}/users/current/configuration/unused-strategy-id`;
 
+export const dynamic = "force-dynamic"
+
 const headers = {
   "Content-Type": "application/json",
   Accept: "application/json",

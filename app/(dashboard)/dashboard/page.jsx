@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { auth } from "../../firebase";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 

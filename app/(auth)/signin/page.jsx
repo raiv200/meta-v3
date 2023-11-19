@@ -4,12 +4,18 @@ import { HomeIcon, AtSignIcon, LockIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function LogInPage() {
   const router = useRouter();
+
+  const session = useSession();
+
+  // if (!session) {
+  //   router.push('/')
+  // }
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

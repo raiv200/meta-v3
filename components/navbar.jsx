@@ -28,7 +28,7 @@ export function SiteHeader() {
               Sign Up
             </Link>
             <Link
-              href="/login"
+              href="/signin"
               className="bg-gray-100 text-gray-900 px-2 py-1  sm:px-6 sm:py-2 font-semibold text-sm sm:text-md rounded-[4px] hover:bg-gray-200"
             >
               Log In

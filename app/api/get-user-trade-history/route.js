@@ -15,6 +15,8 @@ const endTime = endTimeString;
 const baseUrl = "https://mt-client-api-v1.new-york.agiliumtrade.ai";
 // const API_URL = `${baseUrl}/users/current/accounts/${accountId}/history-deals/time/${startTime}/${endTime}`;
 
+export const dynamic = "force-dynamic"
+
 const headers = {
   Accept: "application/json",
   "auth-token": authToken,

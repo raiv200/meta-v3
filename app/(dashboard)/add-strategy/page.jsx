@@ -9,13 +9,12 @@ import {
   getUserTradeStrategy,
 } from "../../../db/postgres";
 import StrategyList from "./strategy-list";
+import { redirect } from "next/navigation";
 
 export default async function AddNewStrategy() {
   const session = await getServerSession(authOptions);
 
-
   const email = session?.user?.email;
-
 
   const userAccountData = await getUserAccount(email);
   const userId = userAccountData[0]?.id ? userAccountData[0]?.id : "";
@@ -43,12 +42,14 @@ export default async function AddNewStrategy() {
         />
       </div>
 
-      {tradeStrategyDataList. length === 0 && <div>No Strategies Found!!</div>}
-      
-      {tradeStrategyDataList.length > 0 && (
-        <StrategyList providerAccountId={providerAccountId} tradeStrategyDataList={tradeStrategyDataList} />
-      )}
+      {tradeStrategyDataList.length === 0 && <div>No Strategies Found!!</div>}
 
+      {tradeStrategyDataList.length > 0 && (
+        <StrategyList
+          providerAccountId={providerAccountId}
+          tradeStrategyDataList={tradeStrategyDataList}
+        />
+      )}
     </div>
   );
 }

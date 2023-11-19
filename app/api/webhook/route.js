@@ -3,6 +3,8 @@ const PROD_URL = "https://meta-v3.vercel.app";
 const WEB_URL =
   process.env.NODE_ENV === "production" ? PROD_URL : "http://localhost:3000";
 
+  export const dynamic = "force-dynamic"
+
 export async function POST(request) {
   try {
     if (!request.body) {

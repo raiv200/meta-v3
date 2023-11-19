@@ -9,6 +9,8 @@ const headers = {
   "auth-token": authToken,
 };
 
+export const dynamic = "force-dynamic"
+
 export async function POST(request) {
   try {
     if (!request.body) {

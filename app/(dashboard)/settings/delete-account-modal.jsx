@@ -92,19 +92,7 @@ export default function DeleteAccountModal() {
       return;
     }
 
-    const formRequestUserAccount = {
-      email: email,
-    };
-    const accountResponse = await fetch("/api/delete-user-account", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formRequestUserAccount),
-    });
-    const userAccountData = await accountResponse.json();
-
-    // console.log("Response Data For User Account", userAccountData);
+    
 
 
     const credential = EmailAuthProvider.credential(email, password);
@@ -118,8 +106,8 @@ export default function DeleteAccountModal() {
           .then(() => {
             // User deleted.
            
-            // console.log("User account deleted successfully.");
-            // console.log("Account Deleted!!!!", email);
+            console.log("User account deleted successfully.");
+            console.log("Account Deleted!!!!", email);
 
             toast.success('Account Deleted SuccessFully!!', {
               style: {
@@ -133,11 +121,11 @@ export default function DeleteAccountModal() {
               },
             });
             handleCloseModal();
-            signOut();
+            signOut({redirect:false}).then(() => router.push('/'));;
           })
           .catch((deleteError) => {
             // An error occurred during account deletion.
-            // console.error("Error deleting user:", deleteError);
+            console.error("Error deleting user:", deleteError);
           });
       })
       .catch((reauthError) => {
@@ -145,8 +133,22 @@ export default function DeleteAccountModal() {
         toast.error("Error Deleting Account !!", {
           duration:2000
         })
-        // console.error("Error re-authenticating user:", reauthError);
+        console.error("Error re-authenticating user:", reauthError);
       });
+
+      const formRequestUserAccount = {
+        email: email,
+      };
+      const accountResponse = await fetch("/api/delete-user-account", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formRequestUserAccount),
+      });
+      const userAccountData = await accountResponse.json();
+  
+      console.log("Response Data For User Account", userAccountData);
   };
 
   return (

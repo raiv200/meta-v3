@@ -1,5 +1,7 @@
 import { getAllUserAccount, insertUserAccount } from "../../../db/postgres";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request) {
   try {
     if (!request.body) {

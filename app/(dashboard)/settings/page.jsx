@@ -20,6 +20,7 @@ import { redirect } from "next/dist/server/api-utils";
 
 export default async function SettingsPage() {
   const session = await getServerSession(authOptions);
+
   const email = session?.user?.email;
 
   
@@ -120,14 +121,14 @@ export default async function SettingsPage() {
           </div>
 
           <div>
-            <button className=" flex  disabled:cursor-not-allowed cursor-pointer justify-center rounded-md bg-gray-900 px-4 py-2 text-base font-semibold leading-6 text-gray-100 shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500">
+            <button className=" flex disabled:cursor-not-allowed cursor-pointer justify-center rounded-md bg-gray-900 px-4 py-2 text-base font-semibold leading-6 text-gray-100 shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500">
               Update Profile
             </button>
           </div>
         </div>
       </div>
 
-      <div className="  ">
+      <div className="">
        <DeleteAccountModal  />
       </div>
     </div>

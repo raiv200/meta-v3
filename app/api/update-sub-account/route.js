@@ -4,6 +4,8 @@ import { getUserData } from "../../../utlis/data";
 const authToken = process.env.META_AUTH_TOKEN;
 const baseUrl = "https://mt-provisioning-api-v1.agiliumtrade.agiliumtrade.ai";
 
+export const dynamic = "force-dynamic"
+
 const headers = {
   "Content-Type": "application/json",
   Accept: "application/json",

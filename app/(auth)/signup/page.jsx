@@ -93,7 +93,7 @@ export default function Signup() {
       return;
     }
 
-    router.push("/login");
+    router.push("/signin");
   };
 
   return (
@@ -104,7 +104,7 @@ export default function Signup() {
             <p className="  text-sm text-gray-400">
               Already have an Account?{" "}
               <button
-                onClick={() => router.push("/login")}
+                onClick={() => router.push("/signin")}
                 className="font-semibold leading-6 text-md text-gray-500 hover:text-gray-400"
               >
                 Log In

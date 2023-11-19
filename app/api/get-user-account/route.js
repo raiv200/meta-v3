@@ -4,6 +4,8 @@ const authToken = process.env.META_AUTH_TOKEN;
 // const accountId = process.env.META_ACCOUNT_ID;
 // const baseUrl = "https://mt-client-api-v1.new-york.agiliumtrade.ai";
 
+export const dynamic = "force-dynamic"
+
 const headers = {
   Accept: "application/json",
   "auth-token": authToken,

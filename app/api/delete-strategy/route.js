@@ -4,6 +4,8 @@ const authToken = process.env.META_AUTH_TOKEN;
 // const accountId = process.env.META_ACCOUNT_ID;
 const baseUrl = "https://copyfactory-api-v1.new-york.agiliumtrade.ai";
 
+export const dynamic = "force-dynamic"
+
 const headers = {
   "Content-Type": "application/json",
   Accept: "application/json",

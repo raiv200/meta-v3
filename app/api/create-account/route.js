@@ -7,6 +7,8 @@ const baseUrl = "https://mt-provisioning-api-v1.agiliumtrade.agiliumtrade.ai";
 const API_URL = `${baseUrl}/users/current/accounts`;
 const transactionId = uuidv4().slice(0, 32);
 
+export const dynamic = "force-dynamic"
+
 const headers = {
   "Content-Type": "application/json",
   'Accept': "application/json",

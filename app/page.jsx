@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { SiteHeader } from "../components/navbar";
 import Link from "next/link";
 
@@ -9,18 +9,19 @@ import Link from "next/link";
 export default function Home() {
   const router = useRouter();
 
-  const session = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push("/");
-    },
-  });
+  // const session = useSession({
+  //   required: true,
+  //   onUnauthenticated() {
+  //     console.log("Not Authenticated !!")
+  //     redirect('/signin')
+  //   },
+  // });
 
-  if (!session) {
+  // if (!session) {
     
-    router.push("/signin");
-    return;
-  }
+  //   router.push("/signin");
+  //   return;
+  // }
 
  
 
