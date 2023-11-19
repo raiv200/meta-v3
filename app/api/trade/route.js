@@ -29,14 +29,30 @@ export async function POST(request) {
       newRequestBody.actionType = requestBody.actionType ;
       newRequestBody.symbol = requestBody.symbol === 'GOLD' ? 'XAUUSD' : requestBody.symbol === 'SILVER' ? 'XAGUSD' :'';
       newRequestBody.volume = 0.01;
-      newRequestBody.takeProfit = requestBody.actionType === "ORDER_TYPE_BUY" ? parseFloat(requestBody.price*1.002).toFixed(2) : requestBody.actionType === "ORDER_TYPE_SELL" ? parseFloat(requestBody.price*0.998).toFixed(2) :'';
-      newRequestBody.stopLoss = requestBody.actionType === "ORDER_TYPE_BUY" ? parseFloat(requestBody.price*0.999).toFixed(2) : requestBody.actionType === "ORDER_TYPE_SELL" ? parseFloat(requestBody.price*1.001).toFixed(2) :'';
+      newRequestBody.takeProfit =  
+      requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "GOLD"
+      ? Number((requestBody.price * (1.002)).toFixed(3))
+      : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "GOLD"
+      ? Number((requestBody.price * (0.998)).toFixed(3))
+      : requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "SILVER"
+      ?  Number((requestBody.price * (1.002)).toFixed(5))
+      : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "SILVER"
+      ?  Number((requestBody.price * (0.998)).toFixed(5))
+      : "",
+      newRequestBody.stopLoss = 
+      requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "GOLD"
+      ? Number((requestBody.price * (0.999)).toFixed(3))
+      : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "GOLD"
+      ? Number((requestBody.price * (1.001)).toFixed(3))
+      : requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "SILVER"
+      ?  Number((requestBody.price * (0.999)).toFixed(5))
+      : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "SILVER"
+      ?  Number((requestBody.price * (1.001)).toFixed(5))
+      : "" 
 
-      // newRequestBody.takeProfit = requestBody.takeProfit;
-      // newRequestBody.stopLoss=requestBody.stopLoss;
     }
 
-    console.log("New Request Body",newRequestBody);
+    // console.log("New Request Body From Trade API",newRequestBody);
 
      //  For sell Order
 
@@ -96,12 +112,12 @@ export async function POST(request) {
 
     const tradeResponse = await response.json();
 
-    console.log("Response from Trade API ---> ", tradeResponse);
+    // console.log("Response from Trade API ---> ", tradeResponse);
 
     // console.log("Trade API Called by Webhook ", newRequestBody);
 
     return Response.json(
-      { message: "Trade API Called by Webhook", data: newRequestBody },
+      { message: "Trade API Called by Webhook", data: tradeResponse },
       { status: 200 }
     );
   } catch (error) {

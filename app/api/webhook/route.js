@@ -3,7 +3,7 @@ const PROD_URL = "https://meta-v3.vercel.app";
 const WEB_URL =
   process.env.NODE_ENV === "production" ? PROD_URL : "http://localhost:3000";
 
-  export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
 export async function POST(request) {
   try {
@@ -16,24 +16,27 @@ export async function POST(request) {
     let passedValue = await request.text();
     let requestBody = JSON.parse(passedValue);
 
-    console.log(" Request body ", requestBody);
+    // console.log(" Request body ", requestBody);
     let orderType;
 
-    // console.log(`Placed --- ${requestBody.actionType} for ${requestBody.symbol} Price  ${requestBody.price} `);
-
-    if (requestBody?.actionType === 'buy') {
+    if (requestBody?.actionType === "buy") {
       orderType = "ORDER_TYPE_BUY";
-    } else if (requestBody?.actionType === 'sell') {
+    } else if (requestBody?.actionType === "sell") {
       orderType = "ORDER_TYPE_SELL";
     }
-    console.log(
-      `Placed --- ${orderType} for ${requestBody.symbol} Price  ${requestBody.price} `
-    );
+    // console.log(
+    //   `Placed --- ${orderType} for ${requestBody.symbol} Price  ${requestBody.price} `
+    // );
+
     const newRequestBody = {
       actionType: orderType,
       symbol: requestBody.symbol,
-      price: parseFloat(requestBody.price).toFixed(2),
+      price: requestBody.price,
     };
+
+
+    console.log("New Request Body Webhook API", newRequestBody);
+
     try {
       const response = await fetch(`${WEB_URL}/api/trade`, {
         method: "POST",
@@ -46,7 +49,14 @@ export async function POST(request) {
       if (response.ok) {
         // Request was successful
         const responseData = await response.json();
-        // console.log("Trade request successful:", responseData);
+        console.log("Trade request successful:", responseData);
+        return Response.json(
+          {
+            message: "All Ok!",
+            data: responseData,
+          },
+          { status: 200 }
+        );
       } else {
         // Request failed
         // console.log("Trade request failed:", response.statusText);
@@ -54,7 +64,7 @@ export async function POST(request) {
 
       return Response.json(
         {
-          message: "All Ok!",
+          message: "Error ",
           data: newRequestBody,
         },
         { status: 200 }
@@ -62,6 +72,9 @@ export async function POST(request) {
     } catch (error) {
       // console.log("An error occurred:", error);
     }
+
+
+
 
     // } else if (actionType === "ORDER_TYPE_SELL") {
     //   // console.log(
