@@ -43,7 +43,7 @@ export default function DeleteAccountModal() {
 
     // const result = await user.
 
-    // console.log("user Outside", user);
+    console.log("user Outside", user);
 
     let emailError = false;
     let passwordError = false;
@@ -97,6 +97,17 @@ export default function DeleteAccountModal() {
 
     const credential = EmailAuthProvider.credential(email, password);
 
+    const accountResponse = await fetch("/api/delete-user-account", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formRequestUserAccount),
+    });
+    const userAccountData = await accountResponse.json();
+
+    console.log("Response Data For User Account", userAccountData);
+
     
 
     reauthenticateWithCredential(user, credential)
@@ -139,16 +150,7 @@ export default function DeleteAccountModal() {
       const formRequestUserAccount = {
         email: email,
       };
-      const accountResponse = await fetch("/api/delete-user-account", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formRequestUserAccount),
-      });
-      const userAccountData = await accountResponse.json();
-  
-      console.log("Response Data For User Account", userAccountData);
+     
   };
 
   return (
