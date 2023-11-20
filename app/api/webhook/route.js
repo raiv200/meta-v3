@@ -16,7 +16,7 @@ export async function POST(request) {
     let passedValue = await request.text();
     let requestBody = JSON.parse(passedValue);
 
-    // console.log(" Request body ", requestBody);
+    console.log(" Request body Fro Trading View", requestBody);
     let orderType;
 
     if (requestBody?.actionType === "buy") {
