@@ -31,7 +31,7 @@ export async function POST(request) {
     const newRequestBody = {
       actionType: orderType,
       symbol: requestBody.symbol,
-      price: requestBody.price,
+      price: Number(requestBody.price),
     };
 
 

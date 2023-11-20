@@ -23,8 +23,6 @@ export default function Home() {
   //   return;
   // }
 
- 
-
   return (
     <main className=" relative flex min-h-screen flex-col overflow-hidden ">
       {/* Navbar  */}
