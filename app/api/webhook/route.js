@@ -17,6 +17,19 @@ export async function POST(request) {
     let requestBody = JSON.parse(passedValue);
 
     console.log(" Request body Fro Trading View", requestBody);
+
+
+
+    if(requestBody?.Position.toLowerCase() === "flat" ){
+      return Response.json(
+        {
+          message: "Invalid WebHook Request!! No Trade Placed",
+          position: requestBody?.Position,
+        },
+        { status: 404 }
+      );
+    }
+
     let orderType;
 
     if (requestBody?.actionType === "buy") {
