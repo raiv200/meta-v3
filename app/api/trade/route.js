@@ -52,7 +52,7 @@ export async function POST(request) {
 
     }
 
-    // console.log("New Request Body From Trade API",newRequestBody);
+    console.log("New Request Body From Trade API",newRequestBody);
 
      //  For sell Order
 
