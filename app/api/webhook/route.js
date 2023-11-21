@@ -62,7 +62,7 @@ export async function POST(request) {
       if (response.ok) {
         // Request was successful
         const responseData = await response.json();
-        console.log("Trade request successful:", responseData);
+        // console.log("Trade request successful:", responseData);
         return Response.json(
           {
             message: "All Ok!",

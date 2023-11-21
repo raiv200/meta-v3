@@ -37,6 +37,7 @@ export async function POST(request) {
       : requestBody.actionType === "ORDER_TYPE_SELL" 
       ? Number((requestBody.price * (0.997)).toFixed(3))
       : "",
+      
       newRequestBody.stopLoss = requestBody.actionType === "ORDER_TYPE_BUY" 
       ? Number((requestBody.price * (0.999)).toFixed(3))
       : requestBody.actionType === "ORDER_TYPE_SELL" 
