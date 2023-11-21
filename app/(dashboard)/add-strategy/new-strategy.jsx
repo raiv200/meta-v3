@@ -5,65 +5,77 @@ import Modal from "../../../components/modal";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-export default function CreateNewStrategy({userId,providerAccountId}) {
-
+export default function CreateNewStrategy({ userId, providerAccountId }) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const [showSubscriberModal, setShowSubscriberModal] = useState(false);
   const [formData, setFormData] = useState({
     strategyName: "",
     strategyDescription: "",
     providerAccountId: providerAccountId,
   });
 
+  const [subscriberId,setSubscriberId] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // const handleSubscribeStrategy = async (e) => {
-  //   e.preventDefault();
-  //   console.log("Form Submitted --> ", formData);
-  //   const subscriberId = formData.accountId;
+  const handleSubscribeStrategy = async (e,strategyId) => {
+    e.preventDefault();
+    console.log("Form Submitted --> ", formData);
+    const subId = subscriberId;
 
-  //   const formRequestBody = {
-  //     name: "Test-1",
-  //     subscriptions: [
-  //       {
-  //         strategyId: formData.strategyId,
-  //         multiplier: 1,
-  //       },
-  //     ],
-  //   };
+    console.log("sub Id", subId);
+    console.log("Strategy  Id", strategyId);
 
-  //   const res = await fetch(
-  //     `/api/subscribe-strategy/?subscriberId=${subscriberId}`,
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(formRequestBody),
-  //     }
-  //   );
-  //   const data = await res.json();
+    // const formRequestBody = {
+    //   name: "Test-1",
+    //   subscriptions: [
+    //     {
+    //       strategyId: strategyId,
+    //       multiplier: 1,
+    //     },
+    //   ],
+    // };
 
-  //   if (data) {
-  //     console.log("Strategy Generated Successfully!!!", data);
-  //   }
+    // const res = await fetch(
+    //   `/api/subscribe-strategy/?subscriberId=${subscriberId}`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(formRequestBody),
+    //   }
+    // );
+    // const data = await res.json();
 
-  //   // setFormData({
-  //   //   accountId: "",
-  //   //   strategyId: "",
-  //   // });
-  //   console.log("Subscribed!!!");
-  //   handleCloseModal()
-  // };
+    // if (data) {
+    //   console.log("Strategy Generated Successfully!!!", data);
+    // }
+
+    // // setFormData({
+    // //   accountId: "",
+    // //   strategyId: "",
+    // // });
+    // console.log("Subscribed!!!");
+    handleCloseModal();
+  };
 
   const handleShowModal = () => {
     setShowModal(true);
   };
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleShowSubscriberModal = () => {
+    setShowSubscriberModal(true);
+  };
+  const handleCloseSubscriberModal = () => {
+    setShowSubscriberModal(false);
   };
 
   const handleGenerateStrategy = async (e) => {
@@ -81,12 +93,11 @@ export default function CreateNewStrategy({userId,providerAccountId}) {
     }
 
     const strategyData = {
-      userId:userId,
+      userId: userId,
       accountId: formData.providerAccountId,
       strategyName: formData.strategyName,
       strategyDescription: formData.strategyDescription,
-      createdAt: new Date()
-      
+      createdAt: new Date(),
     };
     // console.log("Strategy Data ----> ", strategyData);
 
@@ -111,20 +122,20 @@ export default function CreateNewStrategy({userId,providerAccountId}) {
       strategyName: "",
       strategyDescription: "",
       providerAccountId: providerAccountId,
-    })
+    });
     handleCloseModal();
-    router.refresh()
+    router.refresh();
   };
 
   return (
     <div className=" w-full p-4">
       <div className="flex justify-end space-x-8 ">
-        {/* <button
-          onClick={handleShowModal}
+        <button
+          onClick={handleShowSubscriberModal}
           className={`flex  cursor-pointer justify-center rounded-md  px-3 py-3 text-base font-semibold leading-6 text-gray-100 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 bg-blue-600 hover:bg-blue-400 `}
         >
           Subscribe Strategy
-        </button> */}
+        </button>
         <button
           onClick={handleShowModal}
           className={`flex  cursor-pointer justify-center rounded-md bg-gray-900 px-3 py-3 text-base font-semibold leading-6 text-gray-100 shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500`}
@@ -132,6 +143,8 @@ export default function CreateNewStrategy({userId,providerAccountId}) {
           Generate New Strategy
         </button>
       </div>
+       {/* For Generating Strategy  */}
+
       {showModal && (
         <Modal onClose={handleCloseModal}>
           <div className="flex flex-col space-y-8 bg-white w-[500px] rounded-md py-4 px-8">
@@ -202,63 +215,64 @@ export default function CreateNewStrategy({userId,providerAccountId}) {
           </div>
         </Modal>
       )}
+      
+      {/* For Subscribe Strategy */}
+
+      {showSubscriberModal && (
+        <Modal onClose={handleCloseSubscriberModal}>
+          <div className="flex flex-col space-y-2 bg-gray-300 w-[400px] rounded-md p-4">
+            <form onSubmit={handleSubscribeStrategy}>
+              <div className="grid gap-4">
+                <div className="grid gap-1">
+                  <label
+                    className="text-sm font-medium text-gray-700"
+                    htmlFor="accountId"
+                  >
+                    Subscriber AccountId
+                  </label>
+                  <input
+                    required
+                    id="accountId"
+                    name="accountId"
+                    placeholder="Subscriber AccountId"
+                    type="text"
+                    value={subscriberId}
+                    onChange={(e) => setSubscriberId(e.target.value) }
+                    className="input"
+                  />
+                </div>
+
+                {/* <div className="grid gap-1">
+                  <label
+                    className="text-sm font-medium text-gray-700"
+                    htmlFor="strategyId"
+                  >
+                    Strategy Id
+                  </label>
+                  <input
+                    required
+                    id="strategyId"
+                    name="strategyId"
+                    placeholder="Strategy Id"
+                    type="text"
+                    value={formData.strategyId}
+                    onChange={handleChange}
+                    className="input"
+                  />
+                </div> */}
+                <button
+                  // disabled={!formData.strategyId || !formData.accountId}
+                  type="submit"
+                  className={` flex w-full disabled:cursor-not-allowed cursor-pointer justify-center rounded-md bg-gray-900 px-3 py-3 text-base font-semibold leading-6 text-gray-100 shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500 `}
+                >
+                  Subscribe Strategy
+                </button>
+              </div>
+            </form>
+          </div>
+        </Modal>
+      )}
+
     </div>
   );
 }
-
-// For Subscribe Strategy
-
-// {showModal && (
-//   <Modal onClose={handleCloseModal}>
-//     <div className="flex flex-col space-y-2 bg-gray-300 w-[400px] rounded-md p-4">
-//       <form onSubmit={handleFormSubmit}>
-//         <div className="grid gap-4">
-//           <div className="grid gap-1">
-//             <label
-//               className="text-sm font-medium text-gray-700"
-//               htmlFor="accountId"
-//             >
-//               Subscriber AccountId
-//             </label>
-//             <input
-//               required
-//               id="accountId"
-//               name="accountId"
-//               placeholder="Subscriber AccountId"
-//               type="text"
-//               value={formData.accountId}
-//               onChange={handleChange}
-//               className="input"
-//             />
-//           </div>
-
-//           <div className="grid gap-1">
-//             <label
-//               className="text-sm font-medium text-gray-700"
-//               htmlFor="strategyId"
-//             >
-//               Strategy Id
-//             </label>
-//             <input
-//               required
-//               id="strategyId"
-//               name="strategyId"
-//               placeholder="Strategy Id"
-//               type="text"
-//               value={formData.strategyId}
-//               onChange={handleChange}
-//               className="input"
-//             />
-//           </div>
-//           <button
-//             disabled={!formData.strategyId || !formData.accountId}
-//             type="submit"
-//             className={` flex w-full disabled:cursor-not-allowed cursor-pointer justify-center rounded-md bg-gray-900 px-3 py-3 text-base font-semibold leading-6 text-gray-100 shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500 `}
-//           >
-//             Subscribe Strategy
-//           </button>
-//         </div>
-//       </form>
-//     </div>
-//   </Modal>
-// )}

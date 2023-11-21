@@ -9,7 +9,6 @@ import {
   getUserTradeStrategy,
 } from "../../../db/postgres";
 import StrategyList from "./strategy-list";
-import { redirect } from "next/navigation";
 
 export default async function AddNewStrategy() {
   const session = await getServerSession(authOptions);
@@ -35,21 +34,18 @@ export default async function AddNewStrategy() {
 
   return (
     <div className="flex flex-col relative   w-full">
-      <div className="flex md:absolute md:top-2 md:right-4">
+      {/* <div className="flex md:absolute md:top-2 md:right-4">
         <CreateNewStrategy
           userId={userId}
           providerAccountId={providerAccountId}
         />
-      </div>
+      </div> */}
 
-      {tradeStrategyDataList.length === 0 && <div>No Strategies Found!!</div>}
-
-      {tradeStrategyDataList.length > 0 && (
-        <StrategyList
-          providerAccountId={providerAccountId}
-          tradeStrategyDataList={tradeStrategyDataList}
-        />
-      )}
+      <StrategyList
+        userId={userId}
+        providerAccountId={providerAccountId}
+        tradeStrategyDataList={tradeStrategyDataList}
+      />
     </div>
   );
 }

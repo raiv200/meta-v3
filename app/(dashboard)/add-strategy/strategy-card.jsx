@@ -28,9 +28,19 @@ export default function StrategyCard({
     providerAccountId: providerAccountId,
   });
 
+  const [subscriberId, setSubscriberId] = useState("");
+  const [showSubscriberModal, setShowSubscriberModal] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleShowSubscriberModal = () => {
+    setShowSubscriberModal(true);
+  };
+  const handleCloseSubscriberModal = () => {
+    setShowSubscriberModal(false);
   };
 
   const handleOpenUpdateModal = () => {
@@ -107,7 +117,7 @@ export default function StrategyCard({
     });
 
     const data = await res.json();
-    
+
     // console.log("Strategy Deleted Successfully!!!", data);
 
     if (data.status === 200) {
@@ -124,6 +134,71 @@ export default function StrategyCard({
 
     handleCloseDeleteModal();
     router.refresh();
+  };
+
+  const handleSubscribeStrategy = async (strategyId) => {
+    const subId = subscriberId;
+
+    console.log("sub Id", subId);
+    console.log("Strategy  Id", strategyId);
+
+    const formRequestBody = {
+      name: "Test-1",
+      subscriptions: [
+        {
+          strategyId: strategyId,
+          multiplier: 1,
+          symbolMapping:[
+            {
+              to:"GOLD",
+              from:'XAUUSD'
+            },
+            {
+              to:"SILVER",
+              from:'XAGUSD'
+            },
+            {
+              to:"GBPUSD",
+              from:'GBPUSD'
+            },
+            {
+              to:"EURUSD",
+              from:'EURUSD'
+            },
+            {
+              to:"USDJPY",
+              from:'USDJPY'
+            },
+  
+          ]
+        },
+        
+      ],
+    };
+
+    console.log(formRequestBody)
+
+    const res = await fetch(
+      `/api/subscribe-strategy/?subscriberId=${subscriberId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formRequestBody),
+      }
+    );
+    const data = await res.json();
+
+    if (data) {
+      console.log("Strategy Subscribed  Successfully!!!", data);
+      toast.success("Strategy Subscribed  Successfully!! !!", {
+        duration: 6000,
+      });
+    }
+
+    setSubscriberId("");
+    handleCloseSubscriberModal();
   };
 
   return (
@@ -237,7 +312,44 @@ export default function StrategyCard({
           </div>
         </Modal>
       )}
-      <div className="rounded-md flex flex-col justify-center min-h-[160px] space-y-4 px-4  border-2">
+
+      {/* For Subscribe Strategy */}
+
+      {showSubscriberModal && (
+        <Modal onClose={handleCloseSubscriberModal}>
+          <div className="flex flex-col space-y-2 bg-gray-300 w-[400px] rounded-md p-4">
+            <div className="grid gap-4">
+              <div className="grid gap-1">
+                <label
+                  className="text-sm font-medium text-gray-700"
+                  htmlFor="accountId"
+                >
+                  Subscriber AccountId
+                </label>
+                <input
+                  required
+                  id="accountId"
+                  name="accountId"
+                  placeholder="Subscriber AccountId"
+                  type="text"
+                  value={subscriberId}
+                  onChange={(e) => setSubscriberId(e.target.value)}
+                  className="input"
+                />
+              </div>
+              <button
+                disabled={!subscriberId}
+                onClick={() => handleSubscribeStrategy(strategyId)}
+                className={` flex w-full disabled:cursor-not-allowed cursor-pointer justify-center rounded-md bg-gray-900 px-3 py-3 text-base font-semibold leading-6 text-gray-100 shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500 `}
+              >
+                Subscribe Strategy
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
+
+      <div className="relative rounded-md flex flex-col justify-center min-h-[160px] space-y-4 px-4  border-2">
         <div className="flex items-center justify-between space-x-6">
           {/* Account Id  */}
 
@@ -274,6 +386,15 @@ export default function StrategyCard({
           <p className="text-md font-medium capitalize text-gray-700">
             {strategyDescription}
           </p>
+        </div>
+
+        <div className="absolute bottom-2 right-2">
+          <button
+            onClick={handleShowSubscriberModal}
+            className={`flex cursor-pointer justify-center rounded-md  px-4 py-1 text-sm font-semibold leading-6 text-gray-100 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 bg-blue-600 hover:bg-blue-400 `}
+          >
+            Subscribe
+          </button>
         </div>
       </div>
     </>
