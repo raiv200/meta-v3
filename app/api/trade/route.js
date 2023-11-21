@@ -31,11 +31,11 @@ export async function POST(request) {
       newRequestBody.volume = 0.01;
       newRequestBody.takeProfit =  
       requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "GOLD"
-      ? Number((requestBody.price * (1.025)).toFixed(3))
+      ? Number((requestBody.price * (1.002)).toFixed(3))
       : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "GOLD"
       ? Number((requestBody.price * (0.998)).toFixed(3))
       : requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "SILVER"
-      ?  Number((requestBody.price * (1.025)).toFixed(3))
+      ?  Number((requestBody.price * (1.002)).toFixed(3))
       : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "SILVER"
       ?  Number((requestBody.price * (0.998)).toFixed(3))
       : "",
@@ -43,11 +43,11 @@ export async function POST(request) {
       requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "GOLD"
       ? Number((requestBody.price * (0.999)).toFixed(3))
       : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "GOLD"
-      ? Number((requestBody.price * (1.015)).toFixed(3))
+      ? Number((requestBody.price * (1.001)).toFixed(3))
       : requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "SILVER"
       ?  Number((requestBody.price * (0.999)).toFixed(3))
       : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "SILVER"
-      ?  Number((requestBody.price * (1.015)).toFixed(3))
+      ?  Number((requestBody.price * (1.001)).toFixed(3))
       : "" 
 
     }
