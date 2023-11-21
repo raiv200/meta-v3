@@ -2,11 +2,11 @@
     "crons": [
       {
         "path": "/api/cron/stop-server",
-        "schedule": "0 3 * * *"
+        "schedule": "0 15 * * *"
       },
       {
         "path": "/api/cron/start-server",
-        "schedule": "0 4 * * *"
+        "schedule": "0 16 * * *"
       }
     ]
   }
