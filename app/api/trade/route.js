@@ -27,27 +27,20 @@ export async function POST(request) {
       requestBody.actionType === "ORDER_TYPE_SELL"
     ) {
       newRequestBody.actionType = requestBody.actionType ;
-      newRequestBody.symbol = requestBody.symbol === 'GOLD' ? 'XAUUSD' : requestBody.symbol === 'SILVER' ? 'XAGUSD' :'';
-      newRequestBody.volume = 0.01;
-      newRequestBody.takeProfit =  
-      requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "GOLD"
-      ? Number((requestBody.price * (1.002)).toFixed(3))
-      : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "GOLD"
-      ? Number((requestBody.price * (0.998)).toFixed(3))
-      : requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "SILVER"
-      ?  Number((requestBody.price * (1.002)).toFixed(3))
-      : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "SILVER"
-      ?  Number((requestBody.price * (0.998)).toFixed(3))
+      newRequestBody.symbol = requestBody.symbol === 'GOLD' ? 'XAUUSD' 
+      : requestBody.symbol === 'SILVER' ? 'XAGUSD' 
+      : requestBody.symbol;
+      newRequestBody.volume = 0.5;
+
+      newRequestBody.takeProfit = requestBody.actionType === "ORDER_TYPE_BUY" 
+      ? Number((requestBody.price * (1.003)).toFixed(3))
+      : requestBody.actionType === "ORDER_TYPE_SELL" 
+      ? Number((requestBody.price * (0.997)).toFixed(3))
       : "",
-      newRequestBody.stopLoss = 
-      requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "GOLD"
+      newRequestBody.stopLoss = requestBody.actionType === "ORDER_TYPE_BUY" 
       ? Number((requestBody.price * (0.999)).toFixed(3))
-      : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "GOLD"
+      : requestBody.actionType === "ORDER_TYPE_SELL" 
       ? Number((requestBody.price * (1.001)).toFixed(3))
-      : requestBody.actionType === "ORDER_TYPE_BUY" && requestBody.symbol === "SILVER"
-      ?  Number((requestBody.price * (0.999)).toFixed(3))
-      : requestBody.actionType === "ORDER_TYPE_SELL" && requestBody.symbol === "SILVER"
-      ?  Number((requestBody.price * (1.001)).toFixed(3))
       : "" 
 
     }
