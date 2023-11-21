@@ -8,12 +8,20 @@ import { redirect } from "next/navigation";
 
 export default async function Dashboardayout({ children }) {
   const session = await getServerSession(authOptions);
+  console.log("Session",session?.user)
 
-  if(session){
-    // console.log("session exist");
-  }else{
-    redirect('/signin');
-  }
+
+   if(!session?.user?.email){
+    console.log("Session does not Exist !!");
+    redirect('/signin')
+   }else{
+    console.log("Session Exist !!")
+   }
+  // if(session){
+  //   // console.log("session exist");
+  // }else{
+  //   redirect('/signin');
+  // }
 
   // console.log("server sesion from Dashboard!!", session);
 
