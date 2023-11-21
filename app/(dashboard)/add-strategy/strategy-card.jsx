@@ -170,7 +170,10 @@ export default function StrategyCard({
               from:'USDJPY'
             },
   
-          ]
+          ],
+          tradeSizeScaling: {
+            mode: "none"
+          },
         },
         
       ],
