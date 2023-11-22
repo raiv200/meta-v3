@@ -32,6 +32,7 @@ export async function POST(request) {
       : requestBody.symbol === 'SILVER' ? 'XAGUSD' 
       : requestBody.symbol ? requestBody.symbol + '.V' : '';
 
+      
       newRequestBody.volume = 0.1;
 
       newRequestBody.takeProfit = requestBody.actionType === "ORDER_TYPE_BUY" 
