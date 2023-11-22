@@ -99,7 +99,7 @@ export async function POST(request) {
       headers: headers,
       body:JSON.stringify(newRequestBody)
     });
-
+    console.log("Newtwork Response from Trade API ---> ", response);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
