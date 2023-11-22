@@ -29,13 +29,13 @@ export async function POST(request) {
       newRequestBody.actionType = requestBody.actionType ;
       newRequestBody.symbol = requestBody.symbol === 'GOLD' ? 'XAUUSD' 
       : requestBody.symbol === 'SILVER' ? 'XAGUSD' 
-      : requestBody.symbol;
-      newRequestBody.volume = 0.5;
+      : requestBody.symbol + '.V';
+      newRequestBody.volume = 0.1;
 
       newRequestBody.takeProfit = requestBody.actionType === "ORDER_TYPE_BUY" 
-      ? Number((requestBody.price * (1.003)).toFixed(3))
+      ? Number((requestBody.price * (1.001)).toFixed(3))
       : requestBody.actionType === "ORDER_TYPE_SELL" 
-      ? Number((requestBody.price * (0.997)).toFixed(3))
+      ? Number((requestBody.price * (0.999)).toFixed(3))
       : "",
       
       newRequestBody.stopLoss = requestBody.actionType === "ORDER_TYPE_BUY" 
