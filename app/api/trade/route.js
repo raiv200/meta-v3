@@ -1,5 +1,6 @@
 const authToken = process.env.META_AUTH_TOKEN;
-const accountId = process.env.META_ACCOUNT_ID;
+// const accountId = process.env.META_ACCOUNT_ID;
+const accountId = "44c49799-de8d-42ab-ba57-6969a0f58a71";
 const baseUrl = "https://mt-client-api-v1.new-york.agiliumtrade.ai";
 const API_URL = `${baseUrl}/users/current/accounts/${accountId}/trade`;
 
