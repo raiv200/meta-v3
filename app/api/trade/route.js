@@ -30,6 +30,7 @@ export async function POST(request) {
       newRequestBody.symbol = requestBody.symbol === 'GOLD' ? 'XAUUSD' 
       : requestBody.symbol === 'SILVER' ? 'XAGUSD' 
       : requestBody.symbol ? requestBody.symbol + '.V' : '';
+
       newRequestBody.volume = 0.1;
 
       newRequestBody.takeProfit = requestBody.actionType === "ORDER_TYPE_BUY" 
@@ -101,6 +102,7 @@ export async function POST(request) {
     });
     console.log("Newtwork Response from Trade API ---> ", response);
     if (!response.ok) {
+      console.log("Newtwork Response from Trade API ---> ", response.json());
       throw new Error("Network response was not ok");
     }
 
