@@ -106,7 +106,7 @@ export async function POST(request) {
 
     const tradeResponse = await response.json();
 
-    // console.log("Response from Trade API ---> ", tradeResponse);
+    console.log("Response from Trade API ---> ", tradeResponse);
 
     // console.log("Trade API Called by Webhook ", newRequestBody);
 
