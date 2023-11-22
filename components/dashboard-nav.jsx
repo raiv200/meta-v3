@@ -77,7 +77,7 @@ export function DashboardNav() {
                 <div
                   className={cn(
                     "group flex items-center rounded-md px-3 py-2 text-sm  text-gray-100 font-medium  hover:bg-gray-700 hover:text-gray-300",
-                    path === item.href && item.title !== "Dashboard" ? "bg-gray-700" : "transparent",
+                    path === item.href  ? "bg-gray-700" : "transparent",
                     item.disabled && "cursor-not-allowed opacity-80"
                   )}
                 >

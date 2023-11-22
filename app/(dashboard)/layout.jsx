@@ -11,12 +11,12 @@ export default async function Dashboardayout({ children }) {
   console.log("Session",session?.user)
 
 
-   if(!session?.user?.email){
-    console.log("Session does not Exist !!");
-    redirect('/signin')
-   }else{
-    console.log("Session Exist !!")
-   }
+  //  if(!session?.user?.email){
+  //   console.log("Session does not Exist !!");
+  //   redirect('/signin')
+  //  }else{
+  //   console.log("Session Exist !!")
+  //  }
   // if(session){
   //   // console.log("session exist");
   // }else{
