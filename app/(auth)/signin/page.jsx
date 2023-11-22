@@ -48,7 +48,7 @@ export default function LogInPage() {
       });
 
       if (response.ok) {
-        router.push("/dashboard/live");
+        router.push("/dashboard");
         toast.success("Login Successful !!", {
           duration: 4000,
         });
