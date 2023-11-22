@@ -1,8 +1,0 @@
-{
-    "crons": [
-      {
-        "path": "/api/cron/stop-server",
-        "schedule": "0 19 * * *"
-      }
-    ]
-  }

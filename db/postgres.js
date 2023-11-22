@@ -69,6 +69,7 @@ export async function getUserSubAccounts(userId) {
 
   return userdata;
 }
+
 export async function getUserSubAccountsByAccountId(accountId) {
   const userdata = await sql`
         SELECT * FROM user_sub_account WHERE account_id = ${accountId}
