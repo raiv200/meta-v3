@@ -36,7 +36,7 @@ export async function POST(request) {
       newRequestBody.actionType = requestBody.actionType ;
       newRequestBody.symbol = requestBody.symbol === 'GOLD' ? 'XAUUSD' 
       : requestBody.symbol === 'SILVER' ? 'XAGUSD' 
-      : requestBody.symbol;
+      : requestBody.tf.toLowerCase() === '5m' ? requestBody.symbol : requestBody.tf.toLowerCase() === '15m' ? requestBody.symbol + '.V' : requestBody.symbol;
 
       
       newRequestBody.volume = 0.1;
