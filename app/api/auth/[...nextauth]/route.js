@@ -12,6 +12,10 @@ export const authOptions = {
     error: "/error",
   },
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {},

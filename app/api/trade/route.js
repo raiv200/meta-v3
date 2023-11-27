@@ -1,6 +1,6 @@
 const authToken = process.env.META_AUTH_TOKEN;
-// const accountId = process.env.META_ACCOUNT_ID;
-const accountId = "44c49799-de8d-42ab-ba57-6969a0f58a71";
+const accountId = process.env.META_ACCOUNT_ID;
+// const accountId = "aaf9dba9-f7c8-4b57-988e-233933d0b96f";
 const baseUrl = "https://mt-client-api-v1.new-york.agiliumtrade.ai";
 const API_URL = `${baseUrl}/users/current/accounts/${accountId}/trade`;
 
@@ -21,6 +21,8 @@ export async function POST(request) {
     const bodyText = await request.text(); // Read the body as text
     const requestBody = JSON.parse(bodyText);
 
+    console.log("AccountId",accountId);
+
     let newRequestBody = {};
 
     if (
@@ -30,7 +32,7 @@ export async function POST(request) {
       newRequestBody.actionType = requestBody.actionType ;
       newRequestBody.symbol = requestBody.symbol === 'GOLD' ? 'XAUUSD' 
       : requestBody.symbol === 'SILVER' ? 'XAGUSD' 
-      : requestBody.symbol ? requestBody.symbol + '.V' : '';
+      : requestBody.symbol;
 
       
       newRequestBody.volume = 0.1;
@@ -97,20 +99,20 @@ export async function POST(request) {
 
     // console.log("New Request Body ---> ", JSON.stringify(newRequestBody));
 
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: headers,
-      body:JSON.stringify(newRequestBody)
-    });
-    console.log("Newtwork Response from Trade API ---> ", response);
-    if (!response.ok) {
-      console.log("Newtwork Response from Trade API ---> ", response.json());
-      throw new Error("Network response was not ok");
-    }
+    // const response = await fetch(API_URL, {
+    //   method: "POST",
+    //   headers: headers,
+    //   body:JSON.stringify(newRequestBody)
+    // });
+    // console.log("Newtwork Response from Trade API ---> ", response);
+    // if (!response.ok) {
+    //   console.log("Newtwork Response from Trade API ---> ", response.json());
+    //   throw new Error("Network response was not ok");
+    // }
 
-    const tradeResponse = await response.json();
+    // const tradeResponse = await response.json();
 
-    console.log("Response from Trade API ---> ", tradeResponse);
+    // console.log("Response from Trade API ---> ", tradeResponse);
 
     // console.log("Trade API Called by Webhook ", newRequestBody);
 

@@ -154,10 +154,6 @@ export default function StrategyCard({
               from:'XAUUSD'
             },
             {
-              to:"SILVER",
-              from:'XAGUSD'
-            },
-            {
               to:"GBPUSD",
               from:'GBPUSD'
             },

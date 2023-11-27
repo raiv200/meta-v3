@@ -7,6 +7,8 @@ import { getUserAccount, getUserLivePositionByAccountId, getUserOpenOrdersByAcco
 export default async function LiveForexPage() {
   const session = await getServerSession(authOptions);
 
+  console.log("Session",session);
+
   const email = session?.user?.email;
 
   const userAccountData = await getUserAccount(email);
