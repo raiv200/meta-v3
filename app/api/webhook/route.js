@@ -45,6 +45,7 @@ export async function POST(request) {
       actionType: orderType,
       symbol: requestBody.symbol,
       price: Number(requestBody.price),
+      tf:requestBody.tf
     };
 
 

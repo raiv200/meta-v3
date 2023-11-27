@@ -7,18 +7,20 @@ import {
 // API Route to Stop the account Server (Undeploy Account)
 export const dynamic = "force-dynamic";
 
-const authToken = process.env.META_AUTH_TOKEN;
+const authTokenNew = process.env.META_AUTH_TOKEN;
+const authTokenOld = process.env.META_AUTH_TOKEN_OLD;
 const baseUrl = "https://mt-provisioning-api-v1.agiliumtrade.agiliumtrade.ai";
 
-const headers = {
-  "Content-Type": "application/json",
-  Accept: "application/json",
-  "auth-token": authToken,
-};
 
-async function startAccountServer(accountId) {
+
+async function startAccountServer(accountId,email) {
   const API_URL = `${baseUrl}/users/current/accounts/${accountId}/deploy`;
 
+  const headers = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    "auth-token": email.toLowerCase() === 'test@gmail.com' ? authTokenOld : authTokenNew,
+  };
   const response = await fetch(API_URL, {
     method: "POST",
     headers: headers,
@@ -43,6 +45,8 @@ export async function GET(request) {
     const email = searchParams.get("email");
 
     const userAccount = await getUserAccount(email);
+
+    
    
 
     const userId = userAccount[0]?.id;
@@ -53,7 +57,7 @@ export async function GET(request) {
     let isAllServerStarted = false;
 
     for (const user of userSubAccounts) {
-      const serverStatus = await startAccountServer(user.account_id);
+      const serverStatus = await startAccountServer(user.account_id,email);
 
       if (serverStatus === 204) {
         isAllServerStarted = true;

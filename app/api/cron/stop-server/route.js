@@ -7,19 +7,21 @@ import {
 // API Route to Stop the account Server (Undeploy Account)
 export const dynamic = "force-dynamic";
 
-const authToken = process.env.META_AUTH_TOKEN;
+const authTokenNew = process.env.META_AUTH_TOKEN;
+const authTokenOld = process.env.META_AUTH_TOKEN_OLD;
 const baseUrl = "https://mt-provisioning-api-v1.agiliumtrade.agiliumtrade.ai";
 
-const headers = {
-  "Content-Type": "application/json",
-  Accept: "application/json",
-  "auth-token": authToken,
-};
 
-async function stopAccountServer(accountId) {
+
+async function stopAccountServer(accountId,email) {
   const API_URL = `${baseUrl}/users/current/accounts/${accountId}/undeploy`;
 
   // console.log("API URL is", API_URL);
+  const headers = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    "auth-token": email.toLowerCase() === 'test@gmail.com' ? authTokenOld : email.toLowerCase() === 'test3@gmail.com' ? authTokenNew : authTokenNew,
+  };
 
   const response = await fetch(API_URL, {
     method: "POST",
@@ -53,7 +55,7 @@ export async function GET(request) {
     let isAllServerStopped = false;
 
     for (const user of userSubAccounts) {
-      const serverStatus = await stopAccountServer(user.account_id);
+      const serverStatus = await stopAccountServer(user.account_id,email);
 
       if (serverStatus === 204) {
         isAllServerStopped = true;
