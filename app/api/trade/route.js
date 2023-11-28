@@ -1,10 +1,10 @@
 const authTokenNew = process.env.META_AUTH_TOKEN;
+const newAccountId = process.env.META_ACCOUNT_ID;
 const authTokenOld = process.env.META_AUTH_TOKEN_OLD;
-const accountId = process.env.META_ACCOUNT_ID;
+const oldAccountId = process.env.META_ACCOUNT_ID_OLD;
 
 // const accountId = "aaf9dba9-f7c8-4b57-988e-233933d0b96f";
 const baseUrl = "https://mt-client-api-v1.new-york.agiliumtrade.ai";
-const API_URL = `${baseUrl}/users/current/accounts/${accountId}/trade`;
 
 export const dynamic = "force-dynamic"
 
@@ -18,13 +18,22 @@ export async function POST(request) {
 
     const bodyText = await request.text(); // Read the body as text
     const requestBody = JSON.parse(bodyText);
+    let accountId;
+
+    if(requestBody?.tf.toLowerCase() === '15m'){
+      accountId= oldAccountId;
+    }else if(requestBody?.tf.toLowerCase() === '5m'){
+      accountId= newAccountId;
+    }
 
     console.log("AccountId",accountId);
+
+    const API_URL = `${baseUrl}/users/current/accounts/${accountId}/trade`;
 
     const headers = {
       'Content-Type': 'application/json',
       'Accept': "application/json",
-      'auth-token': requestBody?.tf.toLowerCase() === '5m' ? authTokenNew : requestBody?.tf.toLowerCase() === '15m' ? authTokenOld : authTokenNew
+      'auth-token': requestBody?.tf.toLowerCase() === '15m' ? authTokenOld : requestBody?.tf.toLowerCase() === '5m' ? authTokenNew : authTokenNew
     };
 
     let newRequestBody = {};

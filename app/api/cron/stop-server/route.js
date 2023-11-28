@@ -11,16 +11,18 @@ const authTokenNew = process.env.META_AUTH_TOKEN;
 const authTokenOld = process.env.META_AUTH_TOKEN_OLD;
 const baseUrl = "https://mt-provisioning-api-v1.agiliumtrade.agiliumtrade.ai";
 
-
-
-async function stopAccountServer(accountId,email) {
+async function stopAccountServer(accountId, email) {
   const API_URL = `${baseUrl}/users/current/accounts/${accountId}/undeploy`;
 
-  // console.log("API URL is", API_URL);
   const headers = {
     "Content-Type": "application/json",
     Accept: "application/json",
-    "auth-token": email.toLowerCase() === 'test@gmail.com' ? authTokenOld : email.toLowerCase() === 'test3@gmail.com' ? authTokenNew : authTokenNew,
+    "auth-token":
+      email.toLowerCase() === "test@gmail.com"
+        ? authTokenOld
+        : email.toLowerCase() === "test3@gmail.com"
+        ? authTokenNew
+        : authTokenNew,
   };
 
   const response = await fetch(API_URL, {
@@ -51,11 +53,11 @@ export async function GET(request) {
     const userId = userAccount[0]?.id;
 
     const userSubAccounts = await getUserSubAccounts(userId);
-  
+
     let isAllServerStopped = false;
 
     for (const user of userSubAccounts) {
-      const serverStatus = await stopAccountServer(user.account_id,email);
+      const serverStatus = await stopAccountServer(user.account_id, email);
 
       if (serverStatus === 204) {
         isAllServerStopped = true;
